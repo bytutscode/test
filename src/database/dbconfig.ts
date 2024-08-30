@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
-const productionDB = 'postgres://user:password@host:port/dbname';
-const testDB = 'postgres://user:password@host:port/dbname';
+const productionDB = 'postgres://postgres:1234@localhost:5432/shopper_test';
+const testDB = 'postgres://postgres:1234@localhost:5432/shopper_test';
 
 let db = productionDB;
 
