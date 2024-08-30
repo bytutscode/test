@@ -1,12 +1,14 @@
-import { Router, Request, Response } from "express";
-import upload from "../controllers/upload";
+import { Router } from "express";
+import validator from "../middlewares/validator";
+import { measurementSchema } from "../middlewares/validation/createMeasureSchema";
+import { confirmMeasurementSchema } from "../middlewares/validation/confirmMeasureSchema";
+import {createMeasure, confirmMeasure, getMeasures} from '../controllers/measure/index'
+
 
 const router = Router();
 
-router.get('/ping', (req:Request, res:Response)=>{
-    return res.status(200).json({pong:true});
-});
-
-router.get('/upload', upload);
+router.get('/:customercode/list', getMeasures);
+router.post('/upload',validator(measurementSchema), createMeasure);
+router.patch('/confirm',validator(confirmMeasurementSchema), confirmMeasure);
 
 export default router;
