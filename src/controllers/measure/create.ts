@@ -17,7 +17,7 @@ const createMeasureController = async (req: Request, res: Response) => {
         error_description: 'Leitura do mês já realizada'
       });
     }
-    
+
     const imageName = `${customer_code}_${measure_type}_${new Date().getTime()}.jpeg`;
     const imagePath = await saveBase64Image(image,imageName);
 
@@ -37,6 +37,8 @@ const createMeasureController = async (req: Request, res: Response) => {
     });
 
   } catch (erro) {
+    console.log(erro);
+    
     return res.status(500).json({
       error_code: 'Internal Error',
       error_description: 'There was an error while processing your request.'
