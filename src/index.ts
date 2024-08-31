@@ -11,7 +11,9 @@ dotenv.config();
 
 const app = express();
 app.use(express.json( {limit: '10mb'} ));
-app.use(express.static(path.join(__dirname, '../public')));
+const pathToPublic = path.resolve(__dirname, '../../public');
+app.use(express.static(pathToPublic));
+
 
 app.use(router);
 
