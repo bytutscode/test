@@ -32,14 +32,17 @@ export const createMeasure =  async (measureData:any) =>{
 export const has_measured_this_month = async (customer_code: string, type: string, datetime: string) => {
     const measure_datetime = new Date(datetime);
     const startOfMonth = new Date(measure_datetime.getFullYear(), measure_datetime.getMonth(), 1);
-    const endOfMonth = new Date(measure_datetime.getFullYear(), measure_datetime.getMonth() + 1, 0)
+    const endOfMonth = new Date(measure_datetime.getFullYear(), measure_datetime.getMonth() + 1, 0, 23, 59, 59, 999);
 
     return await Measure.findOne({
-        where:{measure_type: type.toUpperCase(),
-        customer_code,
-        measure_datetime: {
-          [Op.between]: [startOfMonth, endOfMonth]}
-      }});
+        where: {
+            measure_type: type.toUpperCase(),
+            customer_code: customer_code.trim(),
+            measure_datetime: {
+                [Op.between]: [startOfMonth, endOfMonth]
+            }
+        }
+    });
 }
 
 export const confirmMeasure = async (measure:Measure, measure_value: number) => {

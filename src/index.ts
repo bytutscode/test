@@ -16,6 +16,8 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use(router);
 
 const port = process.env.PORT || 80;
-app.listen(port, ()=>{
+const server = app.listen(port, () => {
     console.log(`Server running on ${port}`);
 });
+  
+export { server, app }; 

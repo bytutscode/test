@@ -32,11 +32,6 @@ export const getMeasureValueFromLLM = async (mimeType: string, uri: string) => {
 }
 
 export const deleteFile = async(fileName: string) =>{
-    try{
         const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY as string); 
         return fileManager.deleteFile(fileName);
-    }
-    catch(error){
-        return false
-    }
 }
